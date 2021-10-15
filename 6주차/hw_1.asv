@@ -1,0 +1,18 @@
+%% HW 1
+% plot Exponetial RV X's PDF and CDF
+
+x = linspace(0,5,1000);
+
+f_1 = exponentail(1,x); F_1 = cumsum(f_1);
+f_2 = exponentail(2,x); F_2 = cumsum(f_2);
+f_3 = exponentail(3,x); F_3 = cumsum(f_3);
+
+%% plot PDF
+figure(1);
+plot(x, f_1, 'k', x, f_2, 'b-.', x, f_3, 'r--'); title('PDF of Exponential RV'); 
+ylabel('PDF'); xlabel('x'); legend('\lambda = 1', '\lambda = 2', '\lambda = 3', 'location', 'northeast');
+
+%% plot CDF
+figure(2);
+plot(x, F_1, 'k', x, F_2, 'b-.', x, F_3, 'r--'); title('CDF of Exponential RV'); 
+ylabel('PDF'); xlabel('x'); legend('\lambda = 1', '\lambda = 2', '\lambda = 3', 'location', 'northeast');
