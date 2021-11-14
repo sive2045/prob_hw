@@ -1,0 +1,39 @@
+%% HW #3
+% max distribution & min distribution
+
+%% Empirical CDF
+% generate RVs
+rng(0,'twister');
+start_point = -1; end_point = 1;
+X = (end_point-start_point).*rand(1,1000000) + start_point;
+
+rng(0,'twister');
+Y = (end_point-start_point).*rand(1,1000000) + start_point;
+
+empiricalMax = max(X,Y);
+empiricalMin = min(X,Y);
+
+% PDF & CDF
+z = linspace(-1,1,1000);
+
+% Max
+countMax = histcounts(empiricalMax, z);
+empiricalMaxPDF = countMax/1000000/(z(2)-z(1));
+empiricalMaxCDF = cumsum(empiricalMaxPDF)*(z(2)-z(1));
+
+% Min
+countMin = histcounts(empiricalMin, z);
+empiricalMinPDF = countMin/1000000/(z(2)-z(1));
+empiricalMinPDF = cumsum(empiricalMinPDF)*(z(2)-z(1));
+
+%% Theoretical CDF
+theoreticalMaxCDF = ((z+1)/2).^2;
+theoreticalMinCDF = 1 - ((1-z)/2).^2;
+
+%% plot
+% max CDF
+figure(1);
+hold on; grid on;
+bar(z(1:len-1), empiricalMaxCDF, 'b'); plot(x, theoreticalMaxCDF, 'r', 'LineWidth', 2);
+legend('Empirical CDF', 'Theoretical CDF'); xlabel('x'); ylabel('PDF');
+hold off;
